@@ -1,8 +1,8 @@
-# GitHub Repository About Section Description
+# GitHub Repository
 
 Computational pipelines for cell-free chromatin QTL (cfcQTL) mapping, allelic imbalance detection, and cistrome-wide association studies (cfCWAS) from cfChIP-seq data.
 
-## Full Description
+## Description
 
 This repository provides computational scripts and analysis pipelines for identifying genetic determinants of circulating chromatin from large-scale cell-free chromatin profiles. The repository implements:
 
