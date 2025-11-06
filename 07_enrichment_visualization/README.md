@@ -174,7 +174,7 @@ Standard color mappings used across scripts:
 
 ## Output Format
 
-All scripts generate publication-ready PDF figures with:
+All scripts generate PDF figures with:
 - Helvetica font family
 - Consistent color schemes
 - High-resolution vector graphics
