@@ -11,9 +11,7 @@ This repository contains computational scripts and analysis pipelines for identi
 
 The repository implements analyses for detecting allelically imbalanced chromatin activity at variant sites, identifying genetic variants that exhibit significant allelic bias in chromatin accessibility and histone modification patterns. Allelic imbalance detection is performed using beta-binomial statistical tests to assess deviations from expected allelic ratios, with multiple testing correction applied via Q-value estimation. This approach identifies allelic imbalance peaks—chromatin regions with significant allelic bias at variant sites—providing insights into cis-regulatory mechanisms and allele-specific chromatin activity.
 
-This liquid biopsy approach provides scalable access to map genetic effects on regulatory element activity in non-hematologic and developmentally restricted tissues that are typically inaccessible through conventional sampling, facilitating studies of regulatory genetic architecture underlying complex traits and disease risk.
-
-The repository includes enrichment testing, developmental specificity assessment, heritability estimation using stratified linkage disequilibrium score regression (S-LDSC), cell-free cistrome-wide association studies (cfCWAS) for mapping chromatin-trait associations, and allelic imbalance analysis for identifying variant-specific chromatin activity.
+The repository includes enrichment testing, developmental specificity assessment, heritability estimation using stratified linkage disequilibrium score regression (S-LDSC), cell-free cistrome-wide association studies (cfCWAS) for mapping chromatin-trait associations, and allelic imbalance analysis for identifying allele-specific chromatin activity.
 
 ## Overview
 
