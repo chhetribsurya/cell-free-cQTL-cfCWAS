@@ -5,8 +5,6 @@
 [![BEDTools](https://img.shields.io/badge/BEDTools-2.30%2B-green.svg)](https://bedtools.readthedocs.io/)
 [![LDSC](https://img.shields.io/badge/LDSC-1.0.1-orange.svg)](https://github.com/bulik/ldsc)
 
-**GitHub Repository**: [https://github.com/chhetribsurya/cell-free-cQTL-cfCWAS.git](https://github.com/chhetribsurya/cell-free-cQTL-cfCWAS.git)
-
 ## Description
 
 This repository contains computational scripts and analysis pipelines for identifying and characterizing genetic determinants of circulating chromatin from large-scale cell-free chromatin profiles. This work presents a comprehensive map of cell-free chromatin QTLs (cfcQTLs) derived from 751 samples using cfChIP-seq targeting H3K27ac (active enhancers and promoters) and H3K4me3 (active promoters).
