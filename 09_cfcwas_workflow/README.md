@@ -77,7 +77,8 @@ For each cell-free ChIP-seq sample, you need:
 ### 1. Clone or Download Repository
 
 ```bash
-cd /path/to/your/repository
+git clone https://github.com/chhetribsurya/cell-free-cQTL-cfCWAS.git
+cd cell-free-cQTL-cfCWAS/09_cfcwas_workflow
 ```
 
 ### 2. Create Conda Environment
