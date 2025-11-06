@@ -10,7 +10,7 @@ This directory contains the complete workflow for performing cell-free cistrome-
 
 ## Overview
 
-Cell-free Cistrome-Wide Association Studies (cfCWAS) extend the concept of Cistrome-Wide Association Studies (CWAS) to cell-free chromatin data. This approach:
+Cell-free Cistrome-Wide Association Studies (cfCWAS) extend the concept of Cistrome-Wide Association Studies (CWAS) to cell-free chromatin data. cfCWAS is derived from the original CWAS methodology described in [Baca et al., Nature Genetics 2022](https://www.nature.com/articles/s41588-022-01168-y). This approach:
 
 1. Uses cell-free ChIP-seq (cfChIP-seq) data from multiple individuals to model chromatin activity as a function of nearby SNP genotypes
 2. Associates predicted chromatin activity with traits of interest using GWAS summary statistics
@@ -80,6 +80,8 @@ For each cell-free ChIP-seq sample, you need:
 git clone https://github.com/chhetribsurya/cell-free-cQTL-cfCWAS.git
 cd cell-free-cQTL-cfCWAS/09_cfcwas_workflow
 ```
+
+**Note**: If encountered any installation or runtime issues, please refer to the original CWAS methodology: [Baca et al., Nature Genetics 2022](https://www.nature.com/articles/s41588-022-01168-y).
 
 ### 2. Create Conda Environment
 
