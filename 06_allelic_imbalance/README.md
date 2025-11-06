@@ -151,8 +151,7 @@ Statistical tests (ANOVA and non-parametric alternatives) are performed to compa
 
 ## Output Format
 
-All scripts generate publication-ready PDF figures with:
-- Helvetica font family
+All scripts generate PDF figures with:
 - Consistent color schemes
 - High-resolution vector graphics
 - Statistical annotations where appropriate
