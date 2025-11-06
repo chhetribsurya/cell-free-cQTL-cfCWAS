@@ -132,8 +132,7 @@ h3k27ac_color <- "grey"
 
 ## Output Format
 
-All scripts generate publication-ready PDF figures with:
-- Helvetica font family
+All scripts generate PDF figures with:
 - High-resolution vector graphics
 - Standardized track heights and spacing
 - Multi-track genomic visualization
