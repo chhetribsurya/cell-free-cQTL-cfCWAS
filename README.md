@@ -176,7 +176,7 @@ See `09_cfcwas_workflow/README.md` for detailed instructions.
 
 ### Enrichment Testing
 
-Enrichment analyses use Fisher's exact tests to compare overlap frequencies between cQTL sets and size-matched random backgrounds. Permutation testing (100 permutations) is performed to validate findings and provide empirical p-values.
+Enrichment analyses use Fisher's exact tests to compare overlap frequencies between cQTL sets and size-matched random backgrounds.
 
 ### Random Background Generation
 
