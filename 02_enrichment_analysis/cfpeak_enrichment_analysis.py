@@ -5,8 +5,6 @@ cQTL Analysis with Custom Random Background
 
 Analysis pipeline for identifying cell-free circulating chromatin quantitative trait loci (cQTLs)
 associated with developmentally regulated regulatory regions using custom random background.
-
-Author: Surya B. Chhetri
 """
 
 import os
@@ -1412,10 +1410,10 @@ def sanity_check():
 
     # Define test paths
     test_paths = {
-        'base_dir': "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/NewTest_cfChIP-WBC_peaks_H3K4me3Enrich_V2",
-        'cfpeak_file': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/cfChIP_H3K4me3.consensus.peaks.bed",
-        'chromhmm_dir': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/all.dense.browserFiles",
-        'custom_random_bg': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/WBC.consensus.peaks.bed",
+        'base_dir': "/path/to/workspace/cell-free_cQTL-CWAS/NewTest_cfChIP-WBC_peaks_H3K4me3Enrich_V2",
+        'cfpeak_file': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/cfChIP_H3K4me3.consensus.peaks.bed",
+        'chromhmm_dir': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/all.dense.browserFiles",
+        'custom_random_bg': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/WBC.consensus.peaks.bed",
         'genome_build': 'hg19',
         'regulatory_state' : 'active'
     }
@@ -1525,9 +1523,9 @@ print("Processing cfPeak file...")
 
 # Define test paths
 test_paths = {
-    'base_dir': "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/NewTest_cfChIP-WBC_peaks_H3K4me3Enrich_V3",
-    'cfpeak_file': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/cfChIP_H3K4me3.consensus.peaks.bed",
-    'custom_random_bg': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/WBC.consensus.peaks.bed",
+    'base_dir': "/path/to/workspace/cell-free_cQTL-CWAS/NewTest_cfChIP-WBC_peaks_H3K4me3Enrich_V3",
+    'cfpeak_file': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/cfChIP_H3K4me3.consensus.peaks.bed",
+    'custom_random_bg': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/WBC.consensus.peaks.bed",
 }
 
 # Create base directory if it doesn't exist
@@ -1589,11 +1587,6 @@ else:
     print(f"✓ Random background directory does not exist: {random_bg_dir}")
 
 #-----------------------------------------------------------------------------------------
-
-
-input_bed = "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/NewTest_cQTL_H3K4me3_qvalBased_V2/cfcQTLs_unique_to_WBCcQTLs.bed"
-
-
 
 
 

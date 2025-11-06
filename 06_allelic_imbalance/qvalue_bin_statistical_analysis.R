@@ -1,4 +1,4 @@
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 library(qvalue)
 library(ggplot2)
 library(tidyr)

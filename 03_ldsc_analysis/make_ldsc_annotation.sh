@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=make_annot
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=ziwei_zhang@dfci.harvard.edu
+#SBATCH --mail-user=your.email@example.com
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=short
@@ -14,7 +14,8 @@ bed=$1
 name=$2
 out=$3
 
-cd /n/scratch/users/z/ziz597/cwas/summary/work/S-ldsc
+# Update this path to your working directory
+# cd /path/to/your/workspace/work/S-ldsc
 
 mkdir -p work/models/${out}
 sort -k1,1n -k2,2n $bed | sed 's/^/chr/g' | cut -f 1-3 | sed 's/ /\t/g' > work/models/${out}/out.bed

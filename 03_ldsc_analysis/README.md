@@ -1,5 +1,10 @@
 # Stratified LDSC Analysis
 
+[![LDSC](https://img.shields.io/badge/LDSC-1.0.1-orange.svg)](https://github.com/bulik/ldsc)
+[![Python](https://img.shields.io/badge/Python-2.7-blue.svg)](https://www.python.org/)
+[![BEDTools](https://img.shields.io/badge/BEDTools-2.30%2B-green.svg)](https://bedtools.readthedocs.io/)
+[![Bash](https://img.shields.io/badge/Bash-4.0%2B-lightgrey.svg)](https://www.gnu.org/software/bash/)
+
 This directory contains scripts for performing stratified linkage disequilibrium score regression (S-LDSC) analysis to estimate heritability enrichment of cQTLs and regulatory regions.
 
 ## Scripts
@@ -114,4 +119,8 @@ Stratified LDSC is a method for partitioning heritability across genomic annotat
 
 If using LDSC, please cite:
 - Finucane HK, et al. Partitioning heritability by functional annotation using genome-wide association summary statistics. Nature Genetics. 2015.
+
+## Contact
+
+For questions or issues, please contact: surya_chhetri@dfci.harvard.edu
 

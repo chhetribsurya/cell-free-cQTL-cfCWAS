@@ -4,7 +4,7 @@ library(ggplot2)
 library(scales)
 theme_set(theme_classic(base_family = "Helvetica", base_size = 10))
 
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 cf.k27.file <- 'Results/AI_cQTLs/cfChIP.k27.AI.all.sumstats.txt'
 wb.k27.file <- 'Results/AI_cQTLs/wb.k27.AI.all.sumstats.txt'

@@ -5,7 +5,7 @@ library(data.table)
 theme_set(theme_classic(base_family = "Helvetica", base_size = 10))
 
 # ---- Set working directory
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 # ---- Input
 # File contains: Roadmap group name, % overlap (Measurement), and panel ("cfChIP_H3K27ac" or "whole-blood")

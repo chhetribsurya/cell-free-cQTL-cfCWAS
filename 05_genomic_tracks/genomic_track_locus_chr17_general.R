@@ -7,7 +7,7 @@ library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 library(Homo.sapiens)
 
 #Set Working Directory (Adjust Accordingly)
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 #Define Gene Name and Genomic Location
 Gene.name <- 'HOXB13'  # Update this to the relevant gene

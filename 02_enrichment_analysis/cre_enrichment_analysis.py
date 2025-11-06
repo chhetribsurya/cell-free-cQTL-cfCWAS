@@ -339,10 +339,10 @@ if __name__ == "__main__":
         sys.argv.remove('--sanity_check')
         # Hardcoded test paths (update as needed)
         class Args:
-            input_cqtl = "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/NewTest_cQTL_H3K4me3_qvalBased_V4/original_cqtls_with_id.bed"
-            random_cqtl = "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/NewTest_cQTL_H3K4me3_qvalBased_V4/random_cqtls_with_id.bed"
-            cre_bed = "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/ctDNA_CRE_ChIP_peaks_positive.bed"
-            outdir = "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/NewTest_cfcQTLs-CREs_enrichment_V2"
+            input_cqtl = "/path/to/workspace/NewTest_cQTL_H3K4me3_qvalBased_V4/original_cqtls_with_id.bed"
+            random_cqtl = "/path/to/workspace/NewTest_cQTL_H3K4me3_qvalBased_V4/random_cqtls_with_id.bed"
+            cre_bed = "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/ctDNA_CRE_ChIP_peaks_positive.bed"
+            outdir = "/path/to/workspace/NewTest_cfcQTLs-CREs_enrichment_V2"
             n_permutations = 100
             seed = 42
         args = Args()

@@ -1,0 +1,116 @@
+# Cell-Free Cistrome-Wide Association Studies (cfCWAS) Configuration File
+# 
+# This configuration file specifies paths to data files, software, and analysis parameters
+# for the cfCWAS workflow. Update all paths to match your local system.
+
+# ============================================================================
+# Software Paths
+# ============================================================================
+
+# Path to WASP pipeline for removing mapping bias
+wasp_path: "/path/to/WASP"
+
+# Path to GATK3 (after extraction and registration)
+gatk3_path: "/path/to/GATK3"
+
+# Path to LD reference data from 1000 Genomes (FUSION LDREF)
+ldref_path: "LDREF/1000G.EUR.1kg_b37"
+
+# Path to reference genome FASTA file (hg19/GRCh37)
+reference_genome: "/path/to/reference/hg19.fa"
+
+# Path to reference genome index
+reference_genome_index: "/path/to/reference/hg19.fa.fai"
+
+# ============================================================================
+# Sample Information
+# ============================================================================
+# For each cell-free ChIP-seq sample, provide:
+# - bam: Path to processed BAM file (aligned cell-free ChIP-seq reads)
+# - bed: Path to BED file with peak coordinates from cfChIP-seq
+# - vcf: Path to VCF file with phased genotypes
+# - sample_id: Sample identifier for VCF file
+# - peak_type: "broad" or "narrow" (default: "broad" for histone marks)
+
+samples:
+  sample1:
+    bam: "/path/to/data/sample1.cfchip.bam"
+    bed: "/path/to/data/sample1.peaks.bed"
+    vcf: "/path/to/data/sample1.phased.vcf.gz"
+    sample_id: "SAMPLE1"
+    peak_type: "broad"
+  
+  sample2:
+    bam: "/path/to/data/sample2.cfchip.bam"
+    bed: "/path/to/data/sample2.peaks.bed"
+    vcf: "/path/to/data/sample2.phased.vcf.gz"
+    sample_id: "SAMPLE2"
+    peak_type: "broad"
+
+# Add more samples as needed...
+
+# ============================================================================
+# GWAS Traits
+# ============================================================================
+# List of GWAS traits to analyze. Corresponding summary statistics files should be
+# in gwas_data/ directory with format: {trait}.sumstats.gz
+
+gwas_traits:
+  - "breast_cancer"
+  - "prostate_cancer"
+  - "ovarian_cancer"
+  - "lung_cancer"
+  - "colorectal_cancer"
+
+# ============================================================================
+# Analysis Parameters
+# ============================================================================
+
+# QTL mapping parameters
+qtl:
+  window_size: 1000000  # Window size for QTL mapping (bp)
+  pvalue_threshold: 0.05  # P-value threshold for QTL significance
+  fdr_threshold: 0.05  # FDR threshold for QTL significance
+
+# Model building parameters
+model:
+  cross_validation_folds: 5  # Number of folds for cross-validation
+  min_rsq: 0.01  # Minimum R-squared for model inclusion
+  max_models: 1000  # Maximum number of models to test
+
+# Association testing parameters
+association:
+  pvalue_threshold: 0.05  # P-value threshold for association significance
+  fdr_threshold: 0.05  # FDR threshold for association significance
+  min_pvalue: 1e-8  # Minimum p-value to report
+
+# Peak calling parameters (for MACS2)
+peak_calling:
+  qvalue: 0.05  # FDR threshold for peak calling
+  broad_peak: true  # Use broad peaks (for histone marks)
+  fragment_size: 200  # Expected fragment size (bp)
+
+# ============================================================================
+# Cluster Configuration (for SLURM)
+# ============================================================================
+
+cluster:
+  partition: "short"  # SLURM partition name
+  account: "your_account"  # SLURM account name
+  time: "0-4:00"  # Time limit (days-hours:minutes)
+  mem: "16G"  # Memory per job
+  cpus: 4  # CPUs per job
+  email: "your.email@example.com"  # Email for job notifications
+
+# ============================================================================
+# Output Directories
+# ============================================================================
+
+output:
+  base_dir: "analysis"
+  qtl_dir: "analysis/qtl"
+  hsq_dir: "analysis/hsq"
+  stratas_dir: "analysis/stratAS"
+  fusion_dir: "analysis/fusion"
+  cwas_results_dir: "analysis/cwas_results"
+

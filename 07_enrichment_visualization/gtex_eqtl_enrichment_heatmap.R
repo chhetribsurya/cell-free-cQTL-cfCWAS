@@ -11,7 +11,7 @@ suppressPackageStartupMessages({
 })
 
 # ---- Working dir
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 # ---- Inputs
 peaks <- c(

@@ -1,5 +1,10 @@
 # Genomic Track Visualization
 
+[![R](https://img.shields.io/badge/R-%E2%89%A54.0.0-blue.svg)](https://www.r-project.org/)
+[![Bioconductor](https://img.shields.io/badge/Bioconductor-3.14%2B-green.svg)](https://bioconductor.org/)
+[![Gviz](https://img.shields.io/badge/Gviz-1.40%2B-blue.svg)](https://bioconductor.org/packages/Gviz/)
+[![GenomicRanges](https://img.shields.io/badge/GenomicRanges-1.46%2B-green.svg)](https://bioconductor.org/packages/GenomicRanges/)
+
 This directory contains R scripts for creating genomic track visualizations using the Gviz package. These scripts generate publication-quality multi-track plots showing chromatin signals, gene annotations, GWAS data, and SNP positions at specific genomic loci.
 
 ## Scripts
@@ -139,4 +144,8 @@ All scripts generate publication-ready PDF figures with:
 - BigWig files must be properly indexed
 - Global maximum values are calculated across all tracks for consistent y-axis scaling
 - Gene symbols are automatically mapped using the Homo.sapiens annotation package
+
+## Contact
+
+For questions or issues, please contact: surya_chhetri@dfci.harvard.edu
 

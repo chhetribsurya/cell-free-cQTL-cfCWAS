@@ -9,7 +9,7 @@ suppressPackageStartupMessages({
 theme_set(theme_classic(base_family = "Helvetica", base_size = 10))
 mm <- function(x) x/25.4
 
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 cwas_dir <- "Results/CWAS/cwas_resuts_peak/"
 
 blood_cell.list <- c("30000_irnt","30120_irnt",

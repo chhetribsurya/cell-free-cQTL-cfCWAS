@@ -1,5 +1,10 @@
 # Enrichment Analysis Visualization
 
+[![R](https://img.shields.io/badge/R-%E2%89%A54.0.0-blue.svg)](https://www.r-project.org/)
+[![ggplot2](https://img.shields.io/badge/ggplot2-3.3%2B-green.svg)](https://ggplot2.tidyverse.org/)
+[![ComplexHeatmap](https://img.shields.io/badge/ComplexHeatmap-2.10%2B-blue.svg)](https://bioconductor.org/packages/ComplexHeatmap/)
+[![Bioconductor](https://img.shields.io/badge/Bioconductor-3.14%2B-green.svg)](https://bioconductor.org/)
+
 This directory contains R scripts for visualizing enrichment analysis results, including regulatory region enrichments, GTEx eQTL enrichments, and comparative enrichment analyses across different datasets and histone modifications.
 
 ## Scripts
@@ -174,4 +179,8 @@ All scripts generate publication-ready PDF figures with:
 - Consistent color schemes
 - High-resolution vector graphics
 - Standardized figure dimensions
+
+## Contact
+
+For questions or issues, please contact: surya_chhetri@dfci.harvard.edu
 

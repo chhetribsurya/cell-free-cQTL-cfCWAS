@@ -3,7 +3,8 @@ module load gcc/9.2.0
 module load bedtools/2.30.0
 
 #generate all the chromatin states and downsampled peak:
-cd /n/scratch/users/z/ziz597/cwas/summary
+# Update this path to your working directory
+# cd /path/to/your/workspace
 
 query=$1 #e.g., data/cfChIP_H3K27ac/consensus.peaks.bed
 assay=$2 #cfChIP.H3K27ac

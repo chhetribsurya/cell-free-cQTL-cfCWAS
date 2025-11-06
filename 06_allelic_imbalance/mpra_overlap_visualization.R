@@ -8,7 +8,7 @@ suppressPackageStartupMessages({
 })
 
 theme_set(theme_classic(base_family = "Helvetica", base_size = 10))
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 # ---- Inputs
 peaks <- c("k27_combined_cQTLs_Gusev_asqtls",

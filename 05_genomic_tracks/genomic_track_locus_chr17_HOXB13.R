@@ -11,7 +11,7 @@ library(ggplot2)         # Added for theme_set
 library(extrafont)  # For managing fonts
 library(AnnotationDbi)   # For mapIds
 # Set working directory (adjust accordingly)
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 source("../Scripts/functions.R")
 theme_set(

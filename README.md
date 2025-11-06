@@ -1,33 +1,51 @@
-# Cell-Free Chromatin Quantitative Trait Locus (cQTL) Analysis
+# Circulating chromatin reveals effects of disease-associated variants on gene regulation
 
-This repository contains the computational scripts and analysis pipelines used for identifying and characterizing cell-free chromatin quantitative trait loci (cQTLs) from cell-free ChIP-seq data. The analyses include enrichment testing, developmental specificity assessment, and heritability estimation using stratified linkage disequilibrium score regression (S-LDSC).
+[![R](https://img.shields.io/badge/R-%E2%89%A54.0.0-blue.svg)](https://www.r-project.org/)
+[![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg)](https://www.python.org/)
+[![BEDTools](https://img.shields.io/badge/BEDTools-2.30%2B-green.svg)](https://bedtools.readthedocs.io/)
+[![LDSC](https://img.shields.io/badge/LDSC-1.0.1-orange.svg)](https://github.com/bulik/ldsc)
+
+**GitHub Repository**: [https://github.com/chhetribsurya/cell-free-cQTL-cfCWAS.git](https://github.com/chhetribsurya/cell-free-cQTL-cfCWAS.git)
+
+## Description
+
+This repository contains computational scripts and analysis pipelines for identifying and characterizing genetic determinants of circulating chromatin from large-scale cell-free chromatin profiles. The work presents an atlas of cell-free chromatin quantitative trait loci (cfcQTLs) mapped from cancer patients and healthy controls using cell-free chromatin immunoprecipitation sequencing (cfChIP-seq) for H3K27ac (active enhancers and promoters) and H3K4me3 (active promoters) histone modifications.
+
+The repository implements analyses for detecting allelically imbalanced chromatin activity at variant sites, identifying genetic variants that exhibit significant allelic bias in chromatin accessibility and histone modification patterns. Allelic imbalance detection is performed using beta-binomial statistical tests to assess deviations from expected allelic ratios, with multiple testing correction applied via Q-value estimation. This approach identifies allelic imbalance peaks—chromatin regions with significant allelic bias at variant sites—providing insights into cis-regulatory mechanisms and allele-specific chromatin activity.
+
+This liquid biopsy approach provides scalable access to map genetic effects on regulatory element activity in non-hematologic and developmentally restricted tissues that are typically inaccessible through conventional sampling, facilitating studies of regulatory genetic architecture underlying complex traits and disease risk.
+
+The repository includes enrichment testing, developmental specificity assessment, heritability estimation using stratified linkage disequilibrium score regression (S-LDSC), cell-free cistrome-wide association studies (cfCWAS) for mapping chromatin-trait associations, and allelic imbalance analysis for identifying variant-specific chromatin activity.
 
 ## Overview
 
-This repository is organized into eight main analysis modules:
+This repository is organized into ten main analysis modules:
 
-1. **Data Preprocessing** (`01_data_preprocessing/`): Scripts for calculating tissue-specific scores and preparing annotation files
-2. **Enrichment Analysis** (`02_enrichment_analysis/`): Scripts for performing cQTL enrichment analyses with permutation testing
-3. **LDSC Analysis** (`03_ldsc_analysis/`): Scripts for running stratified LDSC analysis
-4. **Sample Metadata Visualization** (`04_sample_metadata/`): Scripts for visualizing sample composition and metadata
-5. **Genomic Track Visualization** (`05_genomic_tracks/`): Scripts for creating multi-track genomic visualizations
-6. **Allelic Imbalance Visualization** (`06_allelic_imbalance/`): Scripts for visualizing allelic imbalance and Q-value analyses
-7. **Enrichment Visualization** (`07_enrichment_visualization/`): Scripts for visualizing enrichment analysis results
-8. **Manhattan Plot Visualization** (`08_manhattan_plots/`): Scripts for generating Manhattan plots from CWAS results
+1. **Setup** (`00_setup/`): Installation instructions and environment configuration
+2. **Data Preprocessing** (`01_data_preprocessing/`): Scripts for calculating tissue-specific scores and preparing annotation files
+3. **Enrichment Analysis** (`02_enrichment_analysis/`): Scripts for performing cQTL enrichment analyses with permutation testing
+4. **LDSC Analysis** (`03_ldsc_analysis/`): Scripts for running stratified LDSC analysis
+5. **Tissue Specificity Analysis** (`04_tissue_specificity/`): Scripts for analyzing and visualizing tissue-specific characteristics and comparisons
+6. **Genomic Track Visualization** (`05_genomic_tracks/`): Scripts for creating multi-track genomic visualizations
+7. **Allelic Imbalance Visualization** (`06_allelic_imbalance/`): Scripts for visualizing allelic imbalance and Q-value analyses
+8. **Enrichment Visualization** (`07_enrichment_visualization/`): Scripts for visualizing enrichment analysis results
+9. **Manhattan Plot Visualization** (`08_manhattan_plots/`): Scripts for generating Manhattan plots from cfCWAS results
+10. **cfCWAS Workflow** (`09_cfcwas_workflow/`): Complete Snakemake workflow for cell-free cistrome-wide association studies
 
 ## Repository Structure
 
 ```
 .
-├── 01_data_preprocessing/           # Data preprocessing and annotation scripts
-├── 02_enrichment_analysis/          # cQTL enrichment analysis scripts
+├── 00_setup/                         # Setup and installation instructions
+├── 01_data_preprocessing/            # Data preprocessing and annotation scripts
+├── 02_enrichment_analysis/           # cQTL enrichment analysis scripts
 ├── 03_ldsc_analysis/                 # Stratified LDSC analysis scripts
-├── 04_sample_metadata/               # Sample composition and metadata visualization
+├── 04_tissue_specificity/            # Tissue-specificity analysis and comparisons
 ├── 05_genomic_tracks/                # Multi-track genomic visualizations
 ├── 06_allelic_imbalance/             # Allelic imbalance and Q-value visualization
 ├── 07_enrichment_visualization/      # Enrichment analysis visualization
 ├── 08_manhattan_plots/               # Manhattan plot generation
-└── docs/                             # Documentation and methods
+└── 09_cfcwas_workflow/               # Cell-free cistrome-wide association studies workflow
 ```
 
 ## Requirements
@@ -68,7 +86,23 @@ This repository is organized into eight main analysis modules:
 - Reference genome files (hg19)
 - 1000 Genomes Project reference data (for LDSC)
 
+See `00_setup/README.md` for detailed installation and setup instructions.
+
 ## Quick Start
+
+### 0. Setup and Installation
+
+Before running analyses, set up your computational environment:
+
+```bash
+cd 00_setup
+# Follow instructions in README.md to:
+# - Install required software
+# - Configure environment variables
+# - Download reference data
+```
+
+See `00_setup/README.md` for complete setup instructions.
 
 ### 1. Data Preprocessing
 
@@ -106,20 +140,37 @@ bash run_stratified_ldsc.sh <trait> <model_files> <baseline_model>
 
 Generate figures using the R scripts organized by visualization type:
 
-- **Sample Metadata** (`04_sample_metadata/`): Sample composition and metadata plots
+- **Tissue Specificity** (`04_tissue_specificity/`): Tissue-specificity analysis and comparison plots
 - **Genomic Tracks** (`05_genomic_tracks/`): Multi-track genomic visualizations
 - **Allelic Imbalance** (`06_allelic_imbalance/`): Q-value distributions and allelic fraction analyses
 - **Enrichment Visualization** (`07_enrichment_visualization/`): Regulatory and eQTL enrichment plots
 - **Manhattan Plots** (`08_manhattan_plots/`): Genome-wide association plots
+- **cfCWAS Workflow** (`09_cfcwas_workflow/`): Complete workflow for cell-free cistrome-wide association studies
 
 Each directory contains scripts organized by analysis type rather than figure numbers.
+
+### 5. cfCWAS Workflow
+
+Run the complete cell-free cistrome-wide association studies workflow:
+
+```bash
+cd 09_cfcwas_workflow
+conda env create -f env/cfcwas_env.yml
+conda activate cfcwas
+# Update config.yaml with your data paths
+sbatch submit.sh
+```
+
+See `09_cfcwas_workflow/README.md` for detailed instructions.
 
 ## Analysis Workflow
 
 1. **Data Preprocessing**: Calculate tissue-specific chromatin peak scores by overlapping with Roadmap Epigenomics annotations
-2. **Enrichment Analysis**: Test for enrichment of cQTLs in developmentally regulated regulatory regions using Fisher's exact tests and permutation testing
-3. **LDSC Analysis**: Estimate heritability enrichment using stratified LDSC
-4. **Visualization**: Generate publication-quality figures summarizing the results
+2. **Allelic Imbalance Detection**: Identify allelically imbalanced chromatin activity at variant sites using beta-binomial tests, detecting chromatin peaks with significant allelic bias and quantifying allele-specific chromatin activity
+3. **Enrichment Analysis**: Test for enrichment of cQTLs in developmentally regulated regulatory regions using Fisher's exact tests and permutation testing
+4. **LDSC Analysis**: Estimate heritability enrichment using stratified LDSC
+5. **cfCWAS Analysis**: Perform cell-free cistrome-wide association studies to identify genetic associations with chromatin features
+6. **Visualization**: Generate publication-quality figures summarizing the results
 
 ## Statistical Methods
 
@@ -130,6 +181,10 @@ Enrichment analyses use Fisher's exact tests to compare overlap frequencies betw
 ### Random Background Generation
 
 Random background sets are generated by sampling from the full pool of available cQTLs that passed equivalent significance thresholds. This approach maintains comparable statistical power and preserves genomic distribution characteristics.
+
+### Allelic Imbalance Detection
+
+Allelic imbalance detection identifies genetic variants exhibiting significant allelic bias in chromatin accessibility and histone modification patterns. The analysis uses beta-binomial statistical tests to assess deviations from expected allelic ratios (50:50) at heterozygous variant sites. Multiple testing correction is applied using Q-value estimation (Storey and Tibshirani, 2003). Allelic imbalance peaks are defined as chromatin regions with significant allelic bias (Q-value < 0.05) at variant sites, providing insights into cis-regulatory mechanisms and allele-specific chromatin activity.
 
 ### Regulatory Region Classification
 
@@ -143,15 +198,11 @@ Regulatory regions are classified into four mutually exclusive specificity categ
 
 If you use these scripts in your research, please cite the associated publication.
 
-## License
-
-[Specify license here]
-
 ## Contact
 
-For questions or issues, please contact [Your Name/Institution].
+For questions or issues, please contact: surya_chhetri@dfci.harvard.edu
 
 ## Documentation
 
-Detailed methods are documented in `docs/Methods_section.md`. Each analysis module contains its own README with specific usage instructions.
+Each analysis module contains its own README with specific usage instructions.
 

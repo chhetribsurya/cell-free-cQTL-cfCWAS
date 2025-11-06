@@ -1,14 +1,11 @@
 #!/bin/bash
 #SBATCH --mail-type=FAIL
-#SBATCH --mail-user=ziwei_zhang@dfci.harvard.edu
+#SBATCH --mail-user=your.email@example.com
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --partition=short
 #SBATCH --mem=4G
 #SBATCH -t 0-1
-
-
-
 
 fg=$1
 bg=$2
@@ -32,7 +29,7 @@ mkdir -p work/enrichment/${out_dir}/perm/${line}/rand
 for i in $(seq 1 50)
 do
 	printf "" > work/enrichment/${out_dir}/perm/${line}/rand/tmp.${i}
-	bedtools shuffle -seed $i -chrom -noOverlapping -i $fg -g /home/ziz597/ref/hg19/hg19.chrom.sizes.nochr  >> work/enrichment/${out_dir}/perm/${line}/rand/tmp.${i}
+	bedtools shuffle -seed $i -chrom -noOverlapping -i $fg -g /path/to/reference/hg19/hg19.chrom.sizes.nochr  >> work/enrichment/${out_dir}/perm/${line}/rand/tmp.${i}
 	sh scripts/enrich.permute.sh ${i} work/enrichment/${out_dir}/perm/${line}/rand/tmp.${i} $fg $target work/enrichment/${out_dir}/perm/${line}/rand
 	rm work/enrichment/${out_dir}/perm/${line}/rand/tmp.${i}
 done

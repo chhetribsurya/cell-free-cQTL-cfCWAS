@@ -7,7 +7,7 @@ suppressPackageStartupMessages({
 })
 
 theme_set(theme_classic(base_family = "Helvetica", base_size = 10))
-setwd("~/Library/CloudStorage/OneDrive-MassGeneralBrigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 # ---- Input
 summ_file <- "Results/MK_cells_enrichment/MK_eQTLs_enrichment.csv"

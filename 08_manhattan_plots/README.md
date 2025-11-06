@@ -1,5 +1,10 @@
 # Manhattan Plot Visualization
 
+[![R](https://img.shields.io/badge/R-%E2%89%A54.0.0-blue.svg)](https://www.r-project.org/)
+[![ggplot2](https://img.shields.io/badge/ggplot2-3.3%2B-green.svg)](https://ggplot2.tidyverse.org/)
+[![data.table](https://img.shields.io/badge/data.table-1.14%2B-blue.svg)](https://rdatatable.gitlab.io/data.table/)
+[![dplyr](https://img.shields.io/badge/dplyr-1.0%2B-blue.svg)](https://dplyr.tidyverse.org/)
+
 This directory contains R scripts for generating Manhattan plots from cQTL and CWAS (Cell-free chromatin Wide Association Study) analysis results. These plots visualize genome-wide association signals across chromosomes for multiple traits.
 
 ## Scripts
@@ -173,4 +178,8 @@ ggsave(..., width = 200, height = 150, units = "mm")
 - Dummy SNPs are required for proper chromosome visualization
 - Scripts handle missing data gracefully
 - Multiple traits can be displayed in single or multi-panel layouts
+
+## Contact
+
+For questions or issues, please contact: surya_chhetri@dfci.harvard.edu
 

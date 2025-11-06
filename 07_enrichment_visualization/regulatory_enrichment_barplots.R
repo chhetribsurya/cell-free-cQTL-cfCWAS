@@ -8,7 +8,7 @@ suppressPackageStartupMessages({
 })
 
 theme_set(theme_classic(base_family = "Helvetica", base_size = 10))
-setwd("~/Library/CloudStorage/OneDrive-MassGeneralBrigham/Projects/CWAS/cfChIP/Manuscripts/Figures/")
+setwd("~/Projects/cfChIP/Manuscripts/Figures/")
 
 # --- Inputs
 fusion.path <- '../../Results/CWAS/Results/cfChIP_H3K4me3/Cancer'

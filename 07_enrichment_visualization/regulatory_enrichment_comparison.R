@@ -1,5 +1,5 @@
 # Set working directory
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 # Libraries
 library(biovizBase)

@@ -6,7 +6,7 @@ library(scales)
 library(patchwork)
 library(readr)
 # Set working directory (adjust accordingly)
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 source('../Scripts/functions.R')
 
@@ -30,7 +30,7 @@ save_pdf <- function(plot, path, w = w_mm, h = h_mm) {
   )
 }
 
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 
 #### Read MPRA file
 mpra.df <- read_xlsx('Data/MPRA/df_allelic_activity_cancer_SNV.xlsx')

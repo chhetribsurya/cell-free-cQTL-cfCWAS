@@ -1,6 +1,6 @@
 library(ggplot2)
 library(readr)   # if you print ratios etc.
-setwd("~/Library/CloudStorage/OneDrive-MassGeneralBrigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 # Global text settings
 base_family <- "Helvetica"
 base_size   <- 10

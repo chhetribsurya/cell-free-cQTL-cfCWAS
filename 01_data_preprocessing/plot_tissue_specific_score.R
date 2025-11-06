@@ -1,4 +1,4 @@
-setwd("~/OneDrive - Mass General Brigham/Projects/CWAS/cfChIP")
+setwd("~/Projects/cfChIP")
 # visualize_detection.R
 library(data.table)
 library(dplyr)

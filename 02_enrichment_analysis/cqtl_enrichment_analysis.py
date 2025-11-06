@@ -5,8 +5,6 @@ cQTL Analysis with Custom Random Background
 
 Analysis pipeline for identifying cell-free circulating chromatin quantitative trait loci (cQTLs)
 associated with developmentally regulated regulatory regions using custom random background.
-
-Author: Surya B. Chhetri
 """
 
 import os
@@ -1413,10 +1411,10 @@ def sanity_check():
 
     # Define test paths for cQTL analysis
     test_paths = {
-        'base_dir': "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/NewTest_cQTL_H3K4me3_qvalBased_V2",
-        'cqtl_file': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/cfChIP_H3K4me3.combined.txt",
-        'chromhmm_dir': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/all.dense.browserFiles",
-        'custom_random_bg': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/WB.combined.txt",
+        'base_dir': "/path/to/workspace/cell-free_cQTL-CWAS/NewTest_cQTL_H3K4me3_qvalBased_V2",
+        'cqtl_file': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/cfChIP_H3K4me3.combined.txt",
+        'chromhmm_dir': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/all.dense.browserFiles",
+        'custom_random_bg': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/WB.combined.txt",
         'genome_build': 'hg19',
         'regulatory_state': 'active',
         'mode': 'cqtl',
@@ -1643,9 +1641,9 @@ print("Processing cQTL file...")
 
 # Define test paths for cQTL analysis
 test_paths = {
-    'base_dir': "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/for_david/NewTest_cQTL_H3K4me3_qvalBased_V2",
-    'cqtl_file': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/cfChIP_H3K4me3.combined.txt",
-    'custom_random_bg': "/Users/chhetribsurya/sc1238/datasets/projects/cfChIP_project/cancer_developmental_region_analysis/WB.combined.txt",
+    'base_dir': "/path/to/workspace/cell-free_cQTL-CWAS/NewTest_cQTL_H3K4me3_qvalBased_V2",
+    'cqtl_file': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/cfChIP_H3K4me3.combined.txt",
+    'custom_random_bg': "/path/to/data/cfChIP_project/cancer_developmental_region_analysis/WB.combined.txt",
     'genome_build': 'hg19',
 }
 
@@ -1696,208 +1694,211 @@ print(f"Saved unique input cQTLs not in random background to: {unique_outfile}")
 #-----------------------------------------------------------------------------------------
 # --- CONFIGURATION ---
 
-input_bed = "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/for_david/NewTest_cQTL_H3K4me3_qvalBased_V2/WBCcQTLs_unique_to_cfcQTLs.bed"
-input_bed = "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/for_david/NewTest_cQTL_H3K4me3_qvalBased_V2/cfcQTLs_unique_to_WBCcQTLs.bed"
+# Update these paths to your data files
+# Uncomment and update one of the following lines depending on your analysis:
+# input_bed = "/path/to/workspace/NewTest_cQTL_H3K4me3_qvalBased_V2/WBCcQTLs_unique_to_cfcQTLs.bed"
+# input_bed = "/path/to/workspace/NewTest_cQTL_H3K4me3_qvalBased_V2/cfcQTLs_unique_to_WBCcQTLs.bed"
+# input_bed = "/path/to/workspace/NewTest_cQTL_H3K4me3_qvalBased_V2/random_cqtls_with_id.bed"
+# input_bed = "/path/to/workspace/NewTest_cQTL_H3K4me3_qvalBased_V2/original_cqtls_with_id.bed"
 
-input_bed = "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/for_david/NewTest_cQTL_H3K4me3_qvalBased_V2/random_cqtls_with_id.bed"
-input_bed = "/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/for_david/NewTest_cQTL_H3K4me3_qvalBased_V2/original_cqtls_with_id.bed"
+# Read the input bed file (uncomment after setting input_bed above)
+# input_bed = BedTool(input_bed)
 
-# Read the input bed file
-input_bed = BedTool(input_bed)
-
-base_dir = test_paths['base_dir']
-base_dir="/Users/chhetribsurya/Dropbox/github_repo/dfci-harvard/cell-free_cQTL-CWAS/for_david/NewTest_cQTL_H3K4me3_qvalBased_V2"
-
-cat_dir = os.path.join(base_dir, "active/regulatory_regions/specificity_categories")
-
-out_dir = os.path.join(base_dir, "WBCcQTLs_unique_to_cfcQTLs")
-out_dir = os.path.join(base_dir, "cfcQTLs_unique_to_WBCcQTLs")
-
-out_dir = os.path.join(base_dir, "full_original_WBCcQTLs")
-out_dir = os.path.join(base_dir, "full_original_cfcQTLs")
-
-# --- CONFIGURATION ---
-
-os.makedirs(out_dir, exist_ok=True)
-analysis_dir = os.path.join(out_dir, "analysis")
-os.makedirs(analysis_dir, exist_ok=True)
-
-# --- LOAD CATEGORY FILES ---
-cat_files = [f for f in os.listdir(cat_dir) if f.endswith('.bed')]
-cat_files.sort()  # for consistent order
-cat_labels = [os.path.splitext(f)[0].replace("_", " ") for f in cat_files]  # Clean for plot
-cat_paths = [os.path.join(cat_dir, f) for f in cat_files]
-
-# --- INTERSECT AND SAVE ---
-intersected = {}
-for fname, path in zip(cat_files, cat_paths):
-    bed = BedTool(path)
-    intersect = input_bed.intersect(bed, u=True)
-    out_path = os.path.join(out_dir, f"{fname.replace('.bed','')}_intersected.bed")
-    intersect.saveas(out_path)
-    intersected[fname] = set(f"{x.chrom}:{x.start}-{x.end}" for x in intersect)
-    print(f"Saved {len(intersected[fname])} unique overlaps for {fname} to {out_path}")
-
-# --- BUILD MEMBERSHIP TABLE FOR UPSET ---
-all_ids = set.union(*intersected.values())
-membership = []
-for cid in all_ids:
-    present = [fname for fname, ids in intersected.items() if cid in ids]
-    membership.append(present)
-upset_data = from_memberships(membership)
-# Aggregate to ensure unique index
-upset_data = upset_data.groupby(level=list(range(upset_data.index.nlevels))).sum()
-
-# Remove '.bed' from index names for prettier labels
-upset_data.index.names = [name.replace('.bed', '').replace('_', ' ').title() for name in upset_data.index.names]
-
-# --- SAVE SUMMARY TABLE ---
-summary_df = upset_data.reset_index()
-summary_df.columns = cat_files + ['count']
-summary_df.to_csv(os.path.join(analysis_dir, "upset_summary.csv"), index=False)
-
-# --- PLOT UPSET ---
-import matplotlib.pyplot as plt
-from matplotlib import cm
-
-plt.figure(figsize=(10, 7))
-up = UpSet(
-    upset_data,
-    show_counts=True,
-    sort_by='cardinality',
-    element_size=None
-)
-up.plot()
-
-# Get the intersection size axes robustly
-ax = plt.gca()
-ax.grid(False)
-
-# Use a colormap for freestyle coloring
-cmap = cm.get_cmap('tab10')
-num_bars = len(ax.patches)
-colors = [cmap(i % cmap.N) for i in range(num_bars)]
-
-# Color each bar with a different color
-for patch, color in zip(ax.patches, colors):
-    patch.set_facecolor(color)
-
-# Reduce font size for all labels
-for label in ax.get_xticklabels() + ax.get_yticklabels():
-    label.set_fontsize(10)
-ax.title.set_fontsize(11)
-ax.xaxis.label.set_fontsize(11)
-ax.yaxis.label.set_fontsize(11)
-
-plt.suptitle("UpSet Plot of WBC-cQTLs Overlapping Specificity Categories", fontsize=13)
-plt.suptitle("UpSet Plot of cfcQTLs Overlapping Specificity Categories", fontsize=13)
-plt.savefig(os.path.join(analysis_dir, "upset_plot.pdf"), bbox_inches='tight')
-plt.close()
-
-# --- PLOT VENN (if <=3 categories) ---
-if len(cat_files) == 2:
-    sets = [intersected[cat_files[0]], intersected[cat_files[1]]]
-    plt.figure(figsize=(6, 6))
-    venn2(sets, set_labels=[cat_files[0].replace("_", "").replace(".bed", ""), cat_files[1].replace("_", "").replace(".bed", "")])
-    plt.title("Venn Diagram of cfcQTLs Overlap")
-    plt.savefig(os.path.join(analysis_dir, "venn2_plot.pdf"), bbox_inches='tight')
-    plt.close()
-elif len(cat_files) == 3:
-    sets = [intersected[cat_files[0]], intersected[cat_files[1]], intersected[cat_files[2]]]
-    plt.figure(figsize=(7, 7))
-    venn3(sets, set_labels=[cat_files[0].replace("_", "").replace(".bed", ""), cat_files[1].replace("_", "").replace(".bed", ""), cat_files[2].replace("_", "").replace(".bed", "")])
-    plt.title("Venn Diagram of cfcQTLs Overlap")
-    plt.savefig(os.path.join(analysis_dir, "venn3_plot.pdf"), bbox_inches='tight')
-    plt.close()
-
-print(f"All intersections and plots saved in {analysis_dir}")
-
-
-#-----------------------------------------------------------------------------------------
-
-#-----------------------------------------------------------------------------------------
-
-# --- BARPLOT OF UNIQUE OVERLAPS FOR EACH CATEGORY (FIXED ORDER & COLORS, CLEAN Y-TICKS) ---
-
-# Fixed color mapping for each category
-category_color_map = {
-    "fetal_specific.bed": "#F1C40F",
-    "developmental_specific.bed": "#E74C3C",
-    "stem_cell_specific.bed": "#3498DB",
-    "adult_specific.bed": "#2ECC71"
-}
-
-# Prepare data in the fixed order
-fixed_order = [
-    "fetal_specific.bed",
-    "developmental_specific.bed",
-    "stem_cell_specific.bed",
-    "adult_specific.bed"
-]
-bar_names = [name.replace('.bed', '').replace('_', ' ').title() for name in fixed_order]
-bar_counts = [len(intersected[name]) for name in fixed_order]
-bar_colors = [category_color_map[name] for name in fixed_order]
-
-fig, ax = plt.subplots(figsize=(7, 6))
-bars = ax.bar(range(len(bar_counts)), bar_counts,
-              color=bar_colors,
-              width=0.6, edgecolor='black')
-
-# X labels (smaller font size)
-ax.set_xticks(range(len(bar_counts)))
-ax.set_xticklabels(bar_names, rotation=20, ha='right')
-ax.tick_params(axis='x', labelsize=9)  # This will always work
-
-# Legends
-legend_elements = [Rectangle((0, 0), 1, 1, facecolor=category_color_map[name], edgecolor='black', label=bar_names[i])
-                   for i, name in enumerate(fixed_order)]
-ax.legend(
-    handles=legend_elements,
-    loc='upper left',
-    frameon=False,
-    handleheight=1.5,
-    handlelength=1.5,
-    borderpad=0.8,
-    labelspacing=0.8,
-    fontsize=10
-)
-
-# Despine and offset
-for spine in ['top', 'right']:
-    ax.spines[spine].set_visible(False)
-ax.spines['left'].set_position(('outward', 8))
-ax.spines['bottom'].set_position(('outward', 8))
-ax.tick_params(axis='both', which='both', length=6, width=1, direction='out')
-ax.yaxis.set_ticks_position('left')
-ax.xaxis.set_ticks_position('bottom')
-ax.set_ylabel('Number of Unique Overlaps', fontsize=13)
-
-# Y-axis ticks (fix duplication/overlap and round up)
-y_min = 0
-raw_y_max = max(bar_counts)
-# For large numbers, round up to the next 100 or 1000 for a clean axis
-if raw_y_max > 1000:
-    y_max = int(np.ceil(raw_y_max / 100.0)) * 100
-    step = 1000 if y_max > 5000 else 500
-elif raw_y_max > 100:
-    y_max = int(np.ceil(raw_y_max / 10.0)) * 10
-    step = 100
-else:
-    y_max = int(np.ceil(raw_y_max))
-    step = 1
-
-yticks = np.arange(y_min, y_max + step, step)
-ax.set_ylim([y_min, y_max])
-ax.set_yticks(yticks)
-ax.set_yticklabels([str(int(y)) for y in yticks])
-
-# Add value labels
-for i, count in enumerate(bar_counts):
-    ax.text(i, count + y_max*0.02, f"{count}", ha='center', va='bottom', fontsize=12, fontweight='bold')
-
-plt.tight_layout()
-plt.savefig(os.path.join(analysis_dir, 'unique_overlap_counts_barplot.pdf'), bbox_inches='tight')
-plt.close()
+# Example configuration section - uncomment and update paths as needed
+# base_dir = test_paths['base_dir']
+# base_dir = "/path/to/workspace/NewTest_cQTL_H3K4me3_qvalBased_V2"
+#
+# cat_dir = os.path.join(base_dir, "active/regulatory_regions/specificity_categories")
+#
+# out_dir = os.path.join(base_dir, "WBCcQTLs_unique_to_cfcQTLs")
+# out_dir = os.path.join(base_dir, "cfcQTLs_unique_to_WBCcQTLs")
+#
+# out_dir = os.path.join(base_dir, "full_original_WBCcQTLs")
+# out_dir = os.path.join(base_dir, "full_original_cfcQTLs")
+#
+# # --- CONFIGURATION ---
+#
+# os.makedirs(out_dir, exist_ok=True)
+# analysis_dir = os.path.join(out_dir, "analysis")
+# os.makedirs(analysis_dir, exist_ok=True)
+#
+# # --- LOAD CATEGORY FILES ---
+# cat_files = [f for f in os.listdir(cat_dir) if f.endswith('.bed')]
+# cat_files.sort()  # for consistent order
+# cat_labels = [os.path.splitext(f)[0].replace("_", " ") for f in cat_files]  # Clean for plot
+# cat_paths = [os.path.join(cat_dir, f) for f in cat_files]
+#
+# # --- INTERSECT AND SAVE ---
+# # Note: input_bed must be defined above (uncomment input_bed assignment)
+# intersected = {}
+# for fname, path in zip(cat_files, cat_paths):
+#     bed = BedTool(path)
+#     intersect = input_bed.intersect(bed, u=True)
+#     out_path = os.path.join(out_dir, f"{fname.replace('.bed','')}_intersected.bed")
+#     intersect.saveas(out_path)
+#     intersected[fname] = set(f"{x.chrom}:{x.start}-{x.end}" for x in intersect)
+#     print(f"Saved {len(intersected[fname])} unique overlaps for {fname} to {out_path}")
+#
+# # --- BUILD MEMBERSHIP TABLE FOR UPSET ---
+# all_ids = set.union(*intersected.values())
+# membership = []
+# for cid in all_ids:
+#     present = [fname for fname, ids in intersected.items() if cid in ids]
+#     membership.append(present)
+# upset_data = from_memberships(membership)
+# # Aggregate to ensure unique index
+# upset_data = upset_data.groupby(level=list(range(upset_data.index.nlevels))).sum()
+#
+# # Remove '.bed' from index names for prettier labels
+# upset_data.index.names = [name.replace('.bed', '').replace('_', ' ').title() for name in upset_data.index.names]
+#
+# # --- SAVE SUMMARY TABLE ---
+# summary_df = upset_data.reset_index()
+# summary_df.columns = cat_files + ['count']
+# summary_df.to_csv(os.path.join(analysis_dir, "upset_summary.csv"), index=False)
+#
+# # --- PLOT UPSET ---
+# import matplotlib.pyplot as plt
+# from matplotlib import cm
+#
+# plt.figure(figsize=(10, 7))
+# up = UpSet(
+#     upset_data,
+#     show_counts=True,
+#     sort_by='cardinality',
+#     element_size=None
+# )
+# up.plot()
+#
+# # Get the intersection size axes robustly
+# ax = plt.gca()
+# ax.grid(False)
+#
+# # Use a colormap for freestyle coloring
+# cmap = cm.get_cmap('tab10')
+# num_bars = len(ax.patches)
+# colors = [cmap(i % cmap.N) for i in range(num_bars)]
+#
+# # Color each bar with a different color
+# for patch, color in zip(ax.patches, colors):
+#     patch.set_facecolor(color)
+#
+# # Reduce font size for all labels
+# for label in ax.get_xticklabels() + ax.get_yticklabels():
+#     label.set_fontsize(10)
+# ax.title.set_fontsize(11)
+# ax.xaxis.label.set_fontsize(11)
+# ax.yaxis.label.set_fontsize(11)
+#
+# plt.suptitle("UpSet Plot of WBC-cQTLs Overlapping Specificity Categories", fontsize=13)
+# plt.suptitle("UpSet Plot of cfcQTLs Overlapping Specificity Categories", fontsize=13)
+# plt.savefig(os.path.join(analysis_dir, "upset_plot.pdf"), bbox_inches='tight')
+# plt.close()
+#
+# # --- PLOT VENN (if <=3 categories) ---
+# if len(cat_files) == 2:
+#     sets = [intersected[cat_files[0]], intersected[cat_files[1]]]
+#     plt.figure(figsize=(6, 6))
+#     venn2(sets, set_labels=[cat_files[0].replace("_", "").replace(".bed", ""), cat_files[1].replace("_", "").replace(".bed", "")])
+#     plt.title("Venn Diagram of cfcQTLs Overlap")
+#     plt.savefig(os.path.join(analysis_dir, "venn2_plot.pdf"), bbox_inches='tight')
+#     plt.close()
+# elif len(cat_files) == 3:
+#     sets = [intersected[cat_files[0]], intersected[cat_files[1]], intersected[cat_files[2]]]
+#     plt.figure(figsize=(7, 7))
+#     venn3(sets, set_labels=[cat_files[0].replace("_", "").replace(".bed", ""), cat_files[1].replace("_", "").replace(".bed", ""), cat_files[2].replace("_", "").replace(".bed", "")])
+#     plt.title("Venn Diagram of cfcQTLs Overlap")
+#     plt.savefig(os.path.join(analysis_dir, "venn3_plot.pdf"), bbox_inches='tight')
+#     plt.close()
+#
+# print(f"All intersections and plots saved in {analysis_dir}")
+#
+#
+# #-----------------------------------------------------------------------------------------
+#
+# #-----------------------------------------------------------------------------------------
+#
+# # --- BARPLOT OF UNIQUE OVERLAPS FOR EACH CATEGORY (FIXED ORDER & COLORS, CLEAN Y-TICKS) ---
+#
+# # Fixed color mapping for each category
+# category_color_map = {
+#     "fetal_specific.bed": "#F1C40F",
+#     "developmental_specific.bed": "#E74C3C",
+#     "stem_cell_specific.bed": "#3498DB",
+#     "adult_specific.bed": "#2ECC71"
+# }
+#
+# # Prepare data in the fixed order
+# fixed_order = [
+#     "fetal_specific.bed",
+#     "developmental_specific.bed",
+#     "stem_cell_specific.bed",
+#     "adult_specific.bed"
+# ]
+# bar_names = [name.replace('.bed', '').replace('_', ' ').title() for name in fixed_order]
+# bar_counts = [len(intersected[name]) for name in fixed_order]
+# bar_colors = [category_color_map[name] for name in fixed_order]
+#
+# fig, ax = plt.subplots(figsize=(7, 6))
+# bars = ax.bar(range(len(bar_counts)), bar_counts,
+#               color=bar_colors,
+#               width=0.6, edgecolor='black')
+#
+# # X labels (smaller font size)
+# ax.set_xticks(range(len(bar_counts)))
+# ax.set_xticklabels(bar_names, rotation=20, ha='right')
+# ax.tick_params(axis='x', labelsize=9)  # This will always work
+#
+# # Legends
+# legend_elements = [Rectangle((0, 0), 1, 1, facecolor=category_color_map[name], edgecolor='black', label=bar_names[i])
+#                    for i, name in enumerate(fixed_order)]
+# ax.legend(
+#     handles=legend_elements,
+#     loc='upper left',
+#     frameon=False,
+#     handleheight=1.5,
+#     handlelength=1.5,
+#     borderpad=0.8,
+#     labelspacing=0.8,
+#     fontsize=10
+# )
+#
+# # Despine and offset
+# for spine in ['top', 'right']:
+#     ax.spines[spine].set_visible(False)
+# ax.spines['left'].set_position(('outward', 8))
+# ax.spines['bottom'].set_position(('outward', 8))
+# ax.tick_params(axis='both', which='both', length=6, width=1, direction='out')
+# ax.yaxis.set_ticks_position('left')
+# ax.xaxis.set_ticks_position('bottom')
+# ax.set_ylabel('Number of Unique Overlaps', fontsize=13)
+#
+# # Y-axis ticks (fix duplication/overlap and round up)
+# y_min = 0
+# raw_y_max = max(bar_counts)
+# # For large numbers, round up to the next 100 or 1000 for a clean axis
+# if raw_y_max > 1000:
+#     y_max = int(np.ceil(raw_y_max / 100.0)) * 100
+#     step = 1000 if y_max > 5000 else 500
+# elif raw_y_max > 100:
+#     y_max = int(np.ceil(raw_y_max / 10.0)) * 10
+#     step = 100
+# else:
+#     y_max = int(np.ceil(raw_y_max))
+#     step = 1
+#
+# yticks = np.arange(y_min, y_max + step, step)
+# ax.set_ylim([y_min, y_max])
+# ax.set_yticks(yticks)
+# ax.set_yticklabels([str(int(y)) for y in yticks])
+#
+# # Add value labels
+# for i, count in enumerate(bar_counts):
+#     ax.text(i, count + y_max*0.02, f"{count}", ha='center', va='bottom', fontsize=12, fontweight='bold')
+#
+# plt.tight_layout()
+# plt.savefig(os.path.join(analysis_dir, 'unique_overlap_counts_barplot.pdf'), bbox_inches='tight')
+# plt.close()
 
 
 
