@@ -142,7 +142,7 @@ Rscript manhattan_plot_cwas_results_k27.R
 
 ## Output Format
 
-All scripts generate publication-ready PDF figures with:
+All scripts generate PDF figures with:
 - Helvetica font family
 - Consistent color schemes across chromosomes
 - High-resolution vector graphics
