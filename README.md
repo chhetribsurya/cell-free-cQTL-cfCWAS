@@ -9,7 +9,7 @@
 
 ## Description
 
-This repository contains computational scripts and analysis pipelines for identifying and characterizing genetic determinants of circulating chromatin from large-scale cell-free chromatin profiles. The work presents an atlas of cell-free chromatin quantitative trait loci (cfcQTLs) mapped from cancer patients and healthy controls using cell-free chromatin immunoprecipitation sequencing (cfChIP-seq) for H3K27ac (active enhancers and promoters) and H3K4me3 (active promoters) histone modifications.
+This repository contains computational scripts and analysis pipelines for identifying and characterizing genetic determinants of circulating chromatin from large-scale cell-free chromatin profiles. This work presents a comprehensive map of cell-free chromatin QTLs (cfcQTLs) derived from 751 samples using cfChIP-seq targeting H3K27ac (active enhancers and promoters) and H3K4me3 (active promoters).
 
 The repository implements analyses for detecting allelically imbalanced chromatin activity at variant sites, identifying genetic variants that exhibit significant allelic bias in chromatin accessibility and histone modification patterns. Allelic imbalance detection is performed using beta-binomial statistical tests to assess deviations from expected allelic ratios, with multiple testing correction applied via Q-value estimation. This approach identifies allelic imbalance peaks—chromatin regions with significant allelic bias at variant sites—providing insights into cis-regulatory mechanisms and allele-specific chromatin activity.
 
