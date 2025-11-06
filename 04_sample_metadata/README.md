@@ -92,8 +92,7 @@ Rscript tissue_enrichment_pie_chart.R
 
 ## Output Format
 
-All scripts generate publication-ready PDF figures with:
-- Helvetica font family
+All scripts generate PDF figures with:
 - Consistent color schemes
 - High-resolution vector graphics
 - Standardized figure dimensions (typically 120x100 mm or similar)
