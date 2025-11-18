@@ -192,7 +192,7 @@ Regulatory regions are classified into four mutually exclusive specificity categ
 
 ## Citation
 
-If you use these scripts in your research, please cite the publication: bioRxiv (coming soon)
+If you use these scripts in your research, please cite the publication: bioRxiv 2025.11.12.688010; doi: https://doi.org/10.1101/2025.11.12.688010
 
 ## Contact
 
