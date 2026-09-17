@@ -15,7 +15,7 @@ The repository includes enrichment testing, developmental specificity assessment
 
 ## Overview
 
-This repository is organized into ten main analysis modules:
+This repository is organized into twelve main analysis modules:
 
 1. **Setup** (`00_setup/`): Installation instructions and environment configuration
 2. **Data Preprocessing** (`01_data_preprocessing/`): Scripts for calculating tissue-specific scores and preparing annotation files
@@ -27,6 +27,8 @@ This repository is organized into ten main analysis modules:
 8. **Enrichment Visualization** (`07_enrichment_visualization/`): Scripts for visualizing enrichment analysis results
 9. **Manhattan Plot Visualization** (`08_manhattan_plots/`): Scripts for generating Manhattan plots from cfCWAS results
 10. **cfCWAS Workflow** (`09_cfcwas_workflow/`): Complete Snakemake workflow for cell-free cistrome-wide association studies
+11. **Covariate-Matched Backgrounds** (`10_matched_random_background/`): `nullranges::matchRanges()` null sets for enrichment testing
+12. **Roadmap Bootstrap and Leave-One-Out** (`11_roadmap_bootstrap_loo/`): Bootstrap and leave-one-out overlap with Roadmap reference epigenomes
 
 ## Repository Structure
 
@@ -41,7 +43,9 @@ This repository is organized into ten main analysis modules:
 ├── 06_allelic_imbalance/             # Allelic imbalance and Q-value visualization
 ├── 07_enrichment_visualization/      # Enrichment analysis visualization
 ├── 08_manhattan_plots/               # Manhattan plot generation
-└── 09_cfcwas_workflow/               # Cell-free cistrome-wide association studies workflow
+├── 09_cfcwas_workflow/               # Cell-free cistrome-wide association studies workflow
+├── 10_matched_random_background/     # Covariate-matched null ranges (matchRanges)
+└── 11_roadmap_bootstrap_loo/         # Roadmap bootstrap and leave-one-out overlap
 ```
 
 ## Requirements
@@ -67,6 +71,7 @@ This repository is organized into ten main analysis modules:
   - RColorBrewer
   - Gviz
   - GenomicRanges
+  - nullranges
   - qvalue
   - Hmisc
   - VennDiagram
@@ -74,6 +79,8 @@ This repository is organized into ten main analysis modules:
 - **Command-line tools**:
   - BEDTools (v2.30.0 or higher)
   - LDSC (for stratified LDSC analysis)
+  - UCSC `bigWigAverageOverBed` (for covariate-matched backgrounds)
+  - OpenSSL (for reproducible bootstrap shuffling)
 
 ### Data Requirements
 
@@ -142,6 +149,8 @@ Generate figures using the R scripts organized by visualization type:
 - **Enrichment Visualization** (`07_enrichment_visualization/`): Regulatory and eQTL enrichment plots
 - **Manhattan Plots** (`08_manhattan_plots/`): Genome-wide association plots
 - **cfCWAS Workflow** (`09_cfcwas_workflow/`): Complete workflow for cell-free cistrome-wide association studies
+- **Covariate-Matched Backgrounds** (`10_matched_random_background/`): Propensity-score matched null ranges via `matchRanges`
+- **Roadmap Bootstrap / Leave-One-Out** (`11_roadmap_bootstrap_loo/`): Uncertainty and sensitivity of Roadmap epigenome overlap
 
 Each directory contains scripts organized by analysis type rather than figure numbers.
 
@@ -159,6 +168,28 @@ sbatch submit.sh
 
 See `09_cfcwas_workflow/README.md` for detailed instructions.
 
+### 6. Covariate-Matched Backgrounds
+
+Generate `matchRanges` null intervals and run enrichment against target BEDs:
+
+```bash
+cd 10_matched_random_background
+# Update paths in run_code.sh, then:
+bash run_code.sh
+```
+
+See `10_matched_random_background/README.md` for covariates, `matchRanges` settings, and the Bioconductor vignette used.
+
+### 7. Roadmap Bootstrap and Leave-One-Out
+
+```bash
+cd 11_roadmap_bootstrap_loo
+bash scripts/roadmap_overlap_bootstrapping.sh "EnhA1,EnhA2,EnhG1,EnhG2" 200 1 0.8
+bash scripts/leave_one_out_overlap.sh "EnhA1,EnhA2,EnhG1,EnhG2" 42
+```
+
+Update the hardcoded data paths inside each script before running. See `11_roadmap_bootstrap_loo/README.md`.
+
 ## Analysis Workflow
 
 1. **Data Preprocessing**: Calculate tissue-specific chromatin peak scores by overlapping with Roadmap Epigenomics annotations
@@ -166,7 +197,9 @@ See `09_cfcwas_workflow/README.md` for detailed instructions.
 3. **Enrichment Analysis**: Test for enrichment of cQTLs in developmentally regulated regulatory regions using Fisher's exact tests and permutation testing
 4. **LDSC Analysis**: Estimate heritability enrichment using stratified LDSC
 5. **cfCWAS Analysis**: Perform cell-free cistrome-wide association studies to identify genetic associations with chromatin features
-6. **Visualization**: Generate publication-quality figures summarizing the results
+6. **Covariate-Matched Enrichment**: Generate `matchRanges` null sets matched on GC, TSS distance, mappability, accessibility, length, and chromosome
+7. **Roadmap Robustness**: Bootstrap overlap with Roadmap 18-state epigenomes and leave-one-out by cancer type or collection site
+8. **Visualization**: Generate publication-quality figures summarizing the results
 
 ## Statistical Methods
 
@@ -176,7 +209,13 @@ Enrichment analyses use Fisher's exact tests to compare overlap frequencies betw
 
 ### Random Background Generation
 
-Random background sets are generated by sampling from the full pool of available cQTLs that passed equivalent significance thresholds. This approach maintains comparable statistical power and preserves genomic distribution characteristics.
+Random background sets can be generated by sampling from the full pool of available cQTLs that passed equivalent significance thresholds. This approach maintains comparable statistical power and preserves genomic distribution characteristics.
+
+Covariate-matched backgrounds (`10_matched_random_background/`) additionally match focal intervals on GC content, distance to TSS, mappability, accessibility, length, and chromosome using `nullranges::matchRanges()` (stratified sampling without replacement). See the [matchRanges vignette](https://www.bioconductor.org/packages/release/bioc/vignettes/nullranges/inst/doc/matchRanges.html) and Davis et al. (2023).
+
+### Roadmap Overlap Robustness
+
+Overlap with Roadmap 18-state ChromHMM epigenomes can be assessed with within-chromosome bootstrap resampling of cfChIP peaks and chromosome-matched WBC downsampling (`11_roadmap_bootstrap_loo/`). Leave-one-out analyses rebuild cfChIP consensus peaks after excluding a cancer type or collection site.
 
 ### Allelic Imbalance Detection
 

@@ -180,6 +180,10 @@ Peaks are categorized based on the percentage of tissues in which they are activ
 - Chromosome coordinates must include the "chr" prefix
 - All genomic intervals are in 0-based, half-open BED format
 
+## See also
+
+- `11_roadmap_bootstrap_loo/`: bootstrap uncertainty and leave-one-out (cancer type or collection site) for the same Roadmap 18-state overlap
+
 ## Contact
 
 For questions or issues, please contact: surya_chhetri@dfci.harvard.edu

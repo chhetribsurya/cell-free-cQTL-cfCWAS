@@ -27,11 +27,14 @@ The analysis pipeline requires several software dependencies and tools. This dir
 - **Python** (3.7+): For analysis scripts
 - **R** (4.0+): For statistical analysis and visualization
 - **Conda/Mamba**: For environment management
+- **nullranges** (Bioconductor): For covariate-matched genomic ranges (`matchRanges`)
+- **UCSC kent utilities**: `bigWigAverageOverBed` for mappability / accessibility covariates
 
 #### Optional but Recommended
 - **SLURM**: For job scheduling on compute clusters
 - **WASP**: For mapping bias correction in allelic imbalance analysis
 - **FUSION**: For cistrome-wide association studies
+- **OpenSSL**: For reproducible `shuf --random-source` streams in bootstrap analyses
 
 ## Installation Steps
 
@@ -65,7 +68,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install(c("Gviz", "GenomicRanges", "rtracklayer",
                        "TxDb.Hsapiens.UCSC.hg19.knownGene",
                        "Homo.sapiens", "AnnotationDbi", "qvalue",
-                       "ComplexHeatmap", "circlize"))
+                       "ComplexHeatmap", "circlize", "nullranges"))
 ```
 
 ### 4. Install External Tools
@@ -89,6 +92,14 @@ git clone https://github.com/bulik/ldsc.git
 cd ldsc
 # Follow LDSC installation instructions
 # Note: LDSC requires Python 2.7
+```
+
+#### UCSC kent utilities (`bigWigAverageOverBed`)
+```bash
+# Using conda (recommended)
+conda install -c bioconda ucsc-bigwigaverageoverbed
+
+# Required by 10_matched_random_background/scripts/make_matched_random_bg.sh
 ```
 
 ### 5. Download Reference Data
@@ -123,6 +134,8 @@ export ROADMAP_DATA=/path/to/roadmap/epigenomics/data
 Update path references in scripts:
 - Check `01_data_preprocessing/` scripts for data directory paths
 - Update `config.yaml` in `09_cfcwas_workflow/` with your data paths
+- Update resource paths in `10_matched_random_background/run_code.sh`
+- Update cluster data paths in `11_roadmap_bootstrap_loo/scripts/`
 - Modify script-specific paths as needed
 
 ## Verification

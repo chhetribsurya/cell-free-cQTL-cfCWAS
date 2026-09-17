@@ -263,6 +263,10 @@ Regulatory regions are classified into four mutually exclusive categories:
 - Random background sets should be size-matched to test sets for valid comparisons
 - Fixed random seeds are used for reproducibility
 
+## See also
+
+- `10_matched_random_background/`: covariate-matched null ranges via `nullranges::matchRanges()` (GC, TSS distance, mappability, accessibility, length, chromosome), used as an additional enrichment null
+
 ## Contact
 
 For questions or issues, please contact: surya_chhetri@dfci.harvard.edu
